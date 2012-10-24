@@ -1,0 +1,80 @@
+@CHARSET "ISO-8859-1";
+#novaContent.faux {
+	background: url('images/faux.png') repeat-y;	
+}
+.rightContent {
+	background:transparent;
+	width:249px;
+	float:left;
+	border:none;
+}
+
+.ad {
+	text-align:center;
+	padding:10px 0;
+	margin:10px 0;
+	width:248px;
+	margin-left:1px;
+	background:#909090 url('../downlods/content/helios/adBackground.png') no-repeat;
+}
+.rightContent p, .rightContent h3 {
+	padding:0 10px;
+}
+
+.rightContent ul {
+	margin-left:30px;	
+}
+
+.rightContent li {
+	padding:3px 10px 3px 0 !important;
+	font-size:12px !important;
+	font-weight:bold !important;
+}
+
+.rightContent h3 {
+	margin-top:7px;
+	color:#333333;	
+	border:0px;
+}
+.descriptionOS{
+	text-align: center;
+	background:#f8f2ed;
+	padding:0.4em;
+	font-weight: bold;
+	border:1px solid #ccc;
+	font-size: 1.3em;
+}
+.downloadnow {
+	-moz-box-shadow:inset 0px 1px 0px 0px #d197fe;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #d197fe;
+	box-shadow:inset 0px 1px 0px 0px #d197fe;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #a53df6), color-stop(1, #7c16cb) );
+	background:-moz-linear-gradient( center top, #a53df6 5%, #7c16cb 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#a53df6', endColorstr='#7c16cb');
+	background-color:#a53df6;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #9c33ed;
+	display:inline-block;
+	color:#ffffff;
+	font-family:arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:0.5em 1em;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #7d15cd;
+	margin:0 0.5em;
+	font-size: 1.8em;
+}
+.downloadnow:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #7c16cb), color-stop(1, #a53df6) );
+	background:-moz-linear-gradient( center top, #7c16cb 5%, #a53df6 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#7c16cb', endColorstr='#a53df6');
+	background-color:#7c16cb;
+	text-decoration: none;
+}
+.downloadnow:active {
+	position:relative;
+	top:1px;
+}
