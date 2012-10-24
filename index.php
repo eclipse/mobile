@@ -93,6 +93,7 @@ switch ($osDisplay) {
 	foreach ($xml->package as $package) {
 		if($package['name'] == 'Eclipse for Mobile Developers'){
 			$url = array('32 bit' => $package['downloadurl'], '64 bit' => $package['downloadurl64']);
+			$icon = $package['icon'];
 			break;
 		}
 	}
@@ -103,7 +104,7 @@ switch ($osDisplay) {
 	
 <div id="maincontent">
 	<div id="midcolumn">
-		<h1><?php print $pageTitle;?></h1>
+		<h1 class="title-icon" style="background: url('<?php print $icon;?>') no-repeat;"><?php print $pageTitle;?></h1>
 <br>
 <p>The essential starting point for Mobile developers, including a Java IDE, C language support, a Git client, XML Editor and Mylyn.</p>
 <div class="descriptionOS">

@@ -44,6 +44,14 @@
 	border:1px solid #ccc;
 	font-size: 1.3em;
 }
+.descriptionOS span{
+	clear: both;
+}
+h1.title-icon{
+	padding:15px 0 20px 64px;
+border-bottom: 1px solid #f0edf8;
+	
+}
 .downloadnow {
 	-moz-box-shadow:inset 0px 1px 0px 0px #d197fe;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #d197fe;
