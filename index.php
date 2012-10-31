@@ -1,15 +1,6 @@
 <?php  																														require_once($_SERVER['DOCUMENT_ROOT'] . "/eclipse.org-common/system/app.class.php");	require_once($_SERVER['DOCUMENT_ROOT'] . "/eclipse.org-common/system/nav.class.php"); 	require_once($_SERVER['DOCUMENT_ROOT'] . "/eclipse.org-common/system/menu.class.php"); 	$App 	= new App();	$Nav	= new Nav();	$Menu 	= new Menu();		include("_projectCommon.php");    # All on the same line to unclutter the user's desktop'
 $documentRoot = $_SERVER['DOCUMENT_ROOT'];
-require_once ($documentRoot . "/membership/promo/promos.php");
-include_once('../downloads/content/downloadPromos.php');
-$adNo = ""; $_preview = "";
-if (isset($_GET['adNo'])) {
-	$adNo = $_GET['adNo'];
-}
-if (isset($_GET['preview'])) {
-	$_preview = $_GET['preview'];
-}
-$promo = chooseDownloadAd($adNo);
+
 $defaultPath = ($App->devmode == TRUE) ? $_SERVER['DOCUMENT_ROOT'] . '/downloads-xml/' : '/home/data/httpd/writable/community/';
 if (!isset($_GET['osType'])) {
 	$osDisplay = $App->getClientOS();
@@ -124,7 +115,7 @@ switch ($osDisplay) {
 					</select>
 				</div>
 
-		<div style="text-align: center;margin-top:3.1em;">
+		<div id="main_downloads">
 		<?php 
 		$other_downloads = array();
 		foreach($downloads as $key => $value){ 
@@ -135,23 +126,30 @@ switch ($osDisplay) {
 				}
 		}
 		 ?>
+		 <div id="other_download_div">
+		 	<h3>Other Download</h3>
+
+	<?php 
+		$x = 0;
+		foreach($other_downloads as $k => $v){
+			$x++;
+			print '<div class="other_down" id="other_down_' . $x . '"><h4>' . $k . '</h4><ul class="list-other-downloads">';
+			
+			foreach($v as $link){
+				
+				print '<li>' . $link . '</li>';
+			}
+			print '</div></ul>';
+		}
+	?>
+	</div>
 		</div>	
 	</div>
 
 	<!-- remove the entire <div> tag to omit the right column!  -->
 	<div id="rightcolumn" class="clearfix">
 			<div class="rightContent">
-	<h3>Other Download</h3>
 
-	<?php 
-		foreach($other_downloads as $k => $v){
-			print '<h4>' . $k . '</h4><ul class="list-other-downloads">';
-			foreach($v as $link){
-				print '<li>' . $link . '</li>';
-			}
-			print '</ul>';
-		}
-	?>
 		
 	<h3>Installing Eclipse</h3>
 	<ul id="installingEclipse">
@@ -161,9 +159,7 @@ switch ($osDisplay) {
 		<li><a href="http://help.eclipse.org/juno/index.jsp?topic=/org.eclipse.platform.doc.user/tasks/tasks-129.htm">Updating Eclipse</a></li>
 	</ul>	
 				
-	<div class="ad">
-		<?php print $promo; ?>
-	</div>			
+		
 						
 	<!--  <h3>Related Links</h3>
 	<ul id="relatedLinks">

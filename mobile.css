@@ -1,18 +1,50 @@
 @CHARSET "ISO-8859-1";
 #novaContent.faux {
-	background: url('images/faux.png') repeat-y;	
+	background: url('images/faux2.png') repeat-y;	
 }
 .rightContent {
 	background:transparent;
-	width:249px;
+	
 	float:left;
 	border:none;
 }
-
+#rightcolumn{
+	width: 185px;
+	padding-right:0;
+	float:right;
+}
+#leftcol{
+	width:249px;
+		margin-left:10px;
+		margin-right:30px;
+}
+#img_paypal{
+	clear: both;
+	float:right;
+}
+#main_downloads{
+	text-align: center;
+	margin-top:3.1em;
+}
+#installingEclipse{
+	margin-bottom:2em;
+}
+#other_download_div{margin-top:2em;width: 420px;margin-left:30px;}
+.other_down{
+	width: 160px;
+	float:left;
+	margin-left:34px;
+}
+#other_down_2{
+	float: right;
+}
+#midcolumn{
+	margin-right:0;
+}
 .ad {
 	text-align:center;
 	padding:10px 0;
-	margin:10px 0;
+	margin:0;
 	width:248px;
 	margin-left:1px;
 	background:#909090 url('../downlods/content/helios/adBackground.png') no-repeat;
