@@ -127,7 +127,7 @@ switch ($osDisplay) {
 		}
 		 ?>
 		 <div id="other_download_div">
-		 	<h3>Other Download</h3>
+		 	<h3>Other Platform</h3>
 
 	<?php 
 		$x = 0;
