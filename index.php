@@ -1,4 +1,4 @@
-<?php  																														require_once($_SERVER['DOCUMENT_ROOT'] . "/eclipse.org-common/system/app.class.php");	require_once($_SERVER['DOCUMENT_ROOT'] . "/eclipse.org-common/system/nav.class.php"); 	require_once($_SERVER['DOCUMENT_ROOT'] . "/eclipse.org-common/system/menu.class.php"); 	$App 	= new App();	$Nav	= new Nav();	$Menu 	= new Menu();		include("../downloads/_projectCommon.php");    # All on the same line to unclutter the user's desktop'
+<?php  																														require_once($_SERVER['DOCUMENT_ROOT'] . "/eclipse.org-common/system/app.class.php");	require_once($_SERVER['DOCUMENT_ROOT'] . "/eclipse.org-common/system/nav.class.php"); 	require_once($_SERVER['DOCUMENT_ROOT'] . "/eclipse.org-common/system/menu.class.php"); 	$App 	= new App();	$Nav	= new Nav();	$Menu 	= new Menu();		include("_projectCommon.php");    # All on the same line to unclutter the user's desktop'
 $documentRoot = $_SERVER['DOCUMENT_ROOT'];
 require_once ($documentRoot . "/membership/promo/promos.php");
 include_once('../downloads/content/downloadPromos.php');
@@ -17,40 +17,37 @@ if (!isset($_GET['osType'])) {
 else {
 	$osDisplay = $_GET['osType'];
 }
+$packages = array();
+$packages['Windows'] = array('packagesDetails' => "releaseCacheWin.xml" );
+$packages['Linux'] = array( 'packagesDetails' => "releaseCacheLinux.xml" );
+$packages['Mac OS X'] = array('packagesDetails' => "releaseCacheCocoa.xml" );
+$packages['carbon'] = array('packagesDetails' => "releaseCacheCarbon.xml" );
 switch ($osDisplay) {
 	case "win32":
 		$display = "Windows";
-		$packagesDetails = "releaseCacheWin.xml";
 		break;
 	case "win64":
 		$display = "Windows";
-		$packagesDetails = "releaseCacheWin.xml";
 		break;
 	case "linux":
 		$display = "Linux";
-		$packagesDetails = "releaseCacheLinux.xml";
 		//$osWarning = "<b>Linux users please note:</b> Eclipse on GCJ is untested.  Please see the Linux <a href='http://wiki.eclipse.org/SDK_Known_Issues#Linux_issues'>Known Issues</a> document.<br />";
 		break;
 	case "linux-x64":
 		$display = "Linux";
-		$packagesDetails = "releaseCacheLinux.xml";
 		//$osWarning = "<b>Linux users please note:</b> Eclipse on GCJ is untested.  Please see the Linux <a href='http://wiki.eclipse.org/SDK_Known_Issues#Linux_issues'>Known Issues</a> document.<br />";
 		break;
 	case "macosx":
-		$packagesDetails = "releaseCacheCocoa.xml";
 		$display = "Mac OS X";
 		break;
 	case "carbon";
-	$packagesDetails = "releaseCacheCarbon.xml";
 	$display = "Mac OS X";
 	break;
 	case "cocoa64":
-		$packagesDetails = "releaseCacheCocoa.xml";
 		$display = "Mac OS X";
 		break;
 	default:
 		$display = "Windows";
-		$packagesDetails = "releaseCacheWin.xml";
 		//$packagesDetails = $documentRoot . "/downloads/content/heliosCacheWin.xml";
 		break;
 }
@@ -87,24 +84,35 @@ switch ($osDisplay) {
 	// and "/home/index.php" both work.
 	//include ('scripts/whatsnew.php');
 	//$whatsnew = rss_to_html('whatsnew');			
-	# Paste your HTML content between the EOHTML markers!	
-	
-	$xml = simplexml_load_file($defaultPath . $packagesDetails);
-	foreach ($xml->package as $package) {
-		if($package['name'] == 'Eclipse for Mobile Developers'){
-			$url = array('32 bit' => $package['downloadurl'], '64 bit' => $package['downloadurl64']);
-			$icon = $package['icon'];
-			break;
+	# Paste your HTML content between the EOHTML markers!
+	function mobile_create_link($value, $key, $class = 'other-downloads'){
+		$return = "";
+		$os = $key;
+		$return = array();
+		foreach($value['url'] as $k => $v){		
+			$return[] = '<a href="' . $v .'" class="downloadnow ' . $class . '">' . $key .' ' .$k . '</a>';			
 		}
+		return $return;
 	}
 	
+	$downloads = array();
+	foreach($packages as $key => $value){
+			$xml = simplexml_load_file($defaultPath . $packages[$key]['packagesDetails']);			
+			foreach ($xml->package as $package) {
+				if($package['name'] == 'Eclipse for Mobile Developers'){
+					$downloads[$key] = array('icon' => $package['icon'], 'url' => array('32 bit' => $package['downloadurl'], '64 bit' => $package['downloadurl64']));
+					break;
+				}
+			}			
+	}
+	//print_r($downloads);
 	ob_start();
 	
 	?>
 	
 <div id="maincontent">
 	<div id="midcolumn">
-		<h1 class="title-icon" style="background: url('<?php print $icon;?>') no-repeat;"><?php print $pageTitle;?></h1>
+		<h1 class="title-icon" style="background: url('<?php print $downloads[$display]['icon']?>') no-repeat;"><?php print $pageTitle;?></h1>
 <br>
 <p>The essential starting point for Mobile developers, including a Java IDE, C language support, a Git client, XML Editor and Mylyn.</p>
 <div class="descriptionOS">
@@ -116,17 +124,35 @@ switch ($osDisplay) {
 					</select>
 				</div>
 
-		<div style="text-align: center;margin-top:2em;">
-		<?php foreach($url as $key => $value){ ?>		
-			<a href="<?php print $value; ?>" class="downloadnow">Download <?php print $key;?></a>		
-		<?php } ?>
+		<div style="text-align: center;margin-top:3.1em;">
+		<?php 
+		$other_downloads = array();
+		foreach($downloads as $key => $value){ 
+				if($key == $display){		
+					print implode('', mobile_create_link($value, $key, 'master-downloads'));	
+		 		}else{
+					$other_downloads[$key] = mobile_create_link($value, $key);	
+				}
+		}
+		 ?>
 		</div>	
 	</div>
 
 	<!-- remove the entire <div> tag to omit the right column!  -->
 	<div id="rightcolumn" class="clearfix">
-
 			<div class="rightContent">
+	<h3>Other Download</h3>
+
+	<?php 
+		foreach($other_downloads as $k => $v){
+			print '<h4>' . $k . '</h4><ul class="list-other-downloads">';
+			foreach($v as $link){
+				print '<li>' . $link . '</li>';
+			}
+			print '</ul>';
+		}
+	?>
+		
 	<h3>Installing Eclipse</h3>
 	<ul id="installingEclipse">
 		<li><a href="http://wiki.eclipse.org/Eclipse/Installation">Install Guide</a></li>
@@ -139,9 +165,9 @@ switch ($osDisplay) {
 		<?php print $promo; ?>
 	</div>			
 						
-	<h3>Related Links</h3>
+	<!--  <h3>Related Links</h3>
 	<ul id="relatedLinks">
-		<!--  <li><a href="http://wiki.eclipse.org/CVS_Howto">Source Code</a></li> -->
+		 <li><a href="http://wiki.eclipse.org/CVS_Howto">Source Code</a></li> 
 		<li><a href="http://help.eclipse.org">Documentation</a></li>
 		<li><a href="/donate/">Make a Donation</a></li>
 		<li><a href="/forums/">Forums</a></li>
@@ -149,7 +175,7 @@ switch ($osDisplay) {
 		<li><a href="/indigo/">Eclipse Indigo (3.7)</a></li>
 		<li><a href="http://wiki.eclipse.org/Older_Versions_Of_Eclipse">Older Versions</a></li>
 	</ul>
-
+-->
 	<h3 class="">Hint:</h3>
 	<p class="jre">You will need a <a href="/downloads/moreinfo/jre.php">Java runtime environment (JRE)</a> to use Eclipse (Java SE 6 or greater is recommended). All downloads are provided under the terms and conditions of the <a href="/legal/epl/notice.php">Eclipse Foundation Software User Agreement</a> unless otherwise specified.</p>			
 
