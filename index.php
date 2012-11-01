@@ -154,7 +154,7 @@ switch ($osDisplay) {
 	<h3>Installing Eclipse</h3>
 	<ul id="installingEclipse">
 		<li><a href="http://wiki.eclipse.org/Eclipse/Installation">Install Guide</a></li>
-		<li><a href="compare.php">Compare/Combine Packages</a></li>
+		<li><a href="/downloads/compare.php">Compare/Combine Packages</a></li>
 		<li><a href="http://wiki.eclipse.org/SDK_Known_Issues">Known Issues</a></li>
 		<li><a href="http://help.eclipse.org/juno/index.jsp?topic=/org.eclipse.platform.doc.user/tasks/tasks-129.htm">Updating Eclipse</a></li>
 	</ul>	
