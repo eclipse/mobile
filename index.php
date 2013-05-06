@@ -106,15 +106,6 @@ switch ($osDisplay) {
 		<h1 class="title-icon" style="background: url('<?php print $downloads[$display]['icon']?>') no-repeat;"><?php print $pageTitle;?></h1>
 <br>
 <p>The essential starting point for Mobile developers, including a Java IDE, C language support, a Git client, XML Editor and Mylyn.</p>
-<div class="descriptionOS">
-					<span id="descriptionText">Eclipse Juno (4.2) SR1 Mobile Package</span> for 
-					<select id="osSelect">
-<option <?php if ($osDisplay == 'win32') echo "selected"?> value="win32">Windows</option>
-<option <?php if ($osDisplay == 'linux' || $osDisplay == 'linux-x64') echo "selected"?> value="linux">Linux</option>
-<option <?php if ($osDisplay == 'macosx') echo "selected"?> value="macosx">Mac OS X (Cocoa)</option>
-					</select>
-				</div>
-
 		<div id="main_downloads">
 		<?php 
 		$other_downloads = array();
@@ -159,29 +150,16 @@ switch ($osDisplay) {
 		<li><a href="http://help.eclipse.org/juno/index.jsp?topic=/org.eclipse.platform.doc.user/tasks/tasks-129.htm">Updating Eclipse</a></li>
 	</ul>	
 				
-		
-						
-	<!--  <h3>Related Links</h3>
-	<ul id="relatedLinks">
-		 <li><a href="http://wiki.eclipse.org/CVS_Howto">Source Code</a></li> 
-		<li><a href="http://help.eclipse.org">Documentation</a></li>
-		<li><a href="/donate/">Make a Donation</a></li>
-		<li><a href="/forums/">Forums</a></li>
-		<li><a href="/juno/">Eclipse Juno (4.2)</a></li>
-		<li><a href="/indigo/">Eclipse Indigo (3.7)</a></li>
-		<li><a href="http://wiki.eclipse.org/Older_Versions_Of_Eclipse">Older Versions</a></li>
-	</ul>
--->
 	<h3 class="">Hint:</h3>
 	<p class="jre">You will need a <a href="/downloads/moreinfo/jre.php">Java runtime environment (JRE)</a> to use Eclipse (Java SE 6 or greater is recommended). All downloads are provided under the terms and conditions of the <a href="/legal/epl/notice.php">Eclipse Foundation Software User Agreement</a> unless otherwise specified.</p>			
 
 </div>
 			
-		</div>
+</div>
 
 </div>
 <?php 
 $html = ob_get_clean();
-		 $App->AddExtraHtmlHeader('<link rel="stylesheet" type="text/css" href="mobile.css" media="screen" /><script type="text/javascript" src="http://www.eclipse.org/forums/js/jquery.js"></script><script type="text/javascript" src="/downloads/content/helios.js"></script>');
-		$App->generatePage('Nova', $Menu, $Nav, $pageAuthor, $pageKeywords, $pageTitle, $html);
+$App->AddExtraHtmlHeader('<link rel="stylesheet" type="text/css" href="mobile.css" media="screen" />');
+$App->generatePage('Nova', $Menu, $Nav, $pageAuthor, $pageKeywords, $pageTitle, $html);
 		
